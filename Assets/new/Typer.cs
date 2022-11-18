@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class Typer : MonoBehaviour
 {
+    public int health = 100;
+    public int curHealth;
     public WordBank wordBank = null;
     public Text wordOutput = null;
 
@@ -18,6 +20,7 @@ public class Typer : MonoBehaviour
     private void Start()
     {
         SetCurrentWord();
+        curHealth = health;
     }
 
     private void SetCurrentWord()
@@ -86,5 +89,15 @@ public class Typer : MonoBehaviour
         Debug.Log(pos[rand]);
 
         transform.position = pos[rand];
+    }
+
+    public void TakeDamage(int amount)
+    {
+        curHealth -= amount;
+        if (curHealth < 0)
+        {
+            curHealth = 0;
+            Debug.Log("Dead");
+        }
     }
 }
